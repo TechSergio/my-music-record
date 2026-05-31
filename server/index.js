@@ -1,4 +1,5 @@
 import express from 'express'
+import 'dotenv/config'
 
 // Create an instance of the Express application
 const app = express()
