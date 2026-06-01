@@ -1,0 +1,44 @@
+import { Router } from 'express'
+import axios from 'axios'
+
+
+const router = Router()
+
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
+const REDIRECT_URI = process.env.REDIRECT_URI
+const SCOPES = 'user-top-read user-read-recently-played user-read-private'
+
+router.get('/login', (req, res) => {
+    const params = new URLSearchParams({
+        client_id: CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: REDIRECT_URI,
+        scope: SCOPES
+    })
+
+    res.redirect(`https://accounts.spotify.com/authorize?${params}`)
+
+} )
+
+router.get('/callback', async(req, res)=> {
+    const code = req.query.code
+
+    const response = await axios.post('https://accounts.spotify.com/api/token', {
+        grant_type : 'authorization_code',
+        code: code,
+        redirect_uri: REDIRECT_URI,
+    }, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + Buffer.from(
+                process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
+            ).toString('base64')
+        }
+    })
+
+    const { access_token, refresh_token } = response.data
+    res.json({ access_token, refresh_token })
+
+})
+
+export default router
