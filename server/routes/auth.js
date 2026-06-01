@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import axios from 'axios'
-
+import { setAccessToken } from '../store.js'
 
 const router = Router()
 
@@ -37,8 +37,9 @@ router.get('/callback', async(req, res)=> {
     })
 
     const { access_token, refresh_token } = response.data
-    res.json({ access_token, refresh_token })
+    setAccessToken(access_token)
 
+    res.json({ access_token, refresh_token })
 })
 
 export default router
