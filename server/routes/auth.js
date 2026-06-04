@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import axios from 'axios'
-import { setAccessToken } from '../store.js'
+import { setAccessToken, setRefreshToken } from '../store.js'
 
 const router = Router()
 
@@ -41,7 +41,7 @@ router.get('/callback', async(req, res)=> {
     const { access_token, refresh_token } = response.data
     //Se aloja el token en el store, para ser accedido
     setAccessToken(access_token)
-
+    setRefreshToken(refresh_token)
     res.json({ access_token, refresh_token })
     } catch(error){
         //Errores al conectar con Spotify
