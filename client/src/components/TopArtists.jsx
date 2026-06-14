@@ -21,7 +21,7 @@ const TopArtists = () => {
   return (
     <div>
       <h1>TopArtists</h1>
-      <ul>
+      <ul className="grid  md:grid-cols-3 lg:grid-cols-4 gap-2">
         {artists.map((artist) => {
           return <li key={artist.id}>{artist.name}</li>
         }
