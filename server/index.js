@@ -2,11 +2,12 @@ import express from 'express'
 import 'dotenv/config'
 import authRouter from './routes/auth.js'
 import apiRouter from './routes/api.js'
+import cors from 'cors'
 
 // Create an instance of the Express application
 const app = express()
 const PORT = 3000
-
+app.use(cors())
 app.use('/auth', authRouter)
 app.use('/api', apiRouter)
 
