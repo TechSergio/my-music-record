@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import fetchFromApi from "../utils/fetchFromApi"
+import ArtistCard from "./ArtistCard"
 
 const TopArtists = () => {
     const [artists, setArtists] = useState([])
@@ -23,7 +24,7 @@ const TopArtists = () => {
       <h1>TopArtists</h1>
       <ul className="grid  md:grid-cols-3 lg:grid-cols-4 gap-2">
         {artists.map((artist) => {
-          return <li key={artist.id}>{artist.name}</li>
+          return <ArtistCard key={artist.id} {...artist} />
         }
       )}
       </ul>
