@@ -1,6 +1,5 @@
 
 const ArtistCard = ({name, images, genres, popularity}) => {
-    console.log(name, images)
 
   return (
     <div>
