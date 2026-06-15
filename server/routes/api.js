@@ -5,8 +5,10 @@ const router = Router()
 
 router.get('/top-artists', async(req, res) => {
 
+    const timeRange = req.query.time_range || 'medium_term'
+
     try {
-        const data = await spotifyGet('https://api.spotify.com/v1/me/top/artists')
+        const data = await spotifyGet(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}`)
         return res.json(data)
 
     } catch(error){
