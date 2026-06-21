@@ -1,5 +1,6 @@
 import Logo from "./components/Logo"
 import TopArtists from "./components/TopArtists"
+import TopTracks from "./components/TopTracks"
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           </h1>
         </header>
         <TopArtists />
+        <TopTracks />
       </div>
     </>
   )
