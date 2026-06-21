@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import fetchFromApi from "../utils/fetchFromApi";
-import ArtistCard from "./ArtistCard";
+import MediaCard from "./MediaCard";
 
 const TopArtists = () => {
   const [artists, setArtists] = useState([]);
@@ -40,7 +40,11 @@ const TopArtists = () => {
       </div>
       <ul className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
         {artists.map((artist, index) => (
-          <ArtistCard key={artist.id} {...artist} rank={index + 1} />
+          <MediaCard 
+          key={artist.id} 
+          name= {artist.name}
+          image={artist.images?.[0]?.url}
+          rank={index + 1} />
         ))}
       </ul>
     </div>
