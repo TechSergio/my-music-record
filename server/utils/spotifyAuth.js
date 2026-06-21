@@ -28,11 +28,13 @@ export async function refreshToken(){
 
     const { access_token, refresh_token } = response.data
     // Spotify puede devolver un nuevo refresh_token, si viene lo actualizamos
-
-    setRefreshToken(refresh_token)
+    if (refresh_token) {
+        setRefreshToken(refresh_token)
+    }
     setAccessToken(access_token)
     } catch (error) {
         console.error(error)
+        throw error
     }
    
 

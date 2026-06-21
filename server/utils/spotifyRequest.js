@@ -14,7 +14,7 @@ export default async function spotifyGet(url) {
     return response.data
 
     } catch(error){
-        if (error.response.status === 401){
+        if (error.response?.status === 401){
             await refreshToken()
             const newtoken = getAccessToken()
             const response = await axios.get(url, {
@@ -23,11 +23,8 @@ export default async function spotifyGet(url) {
                 }
             })
 
-            const data = response.data
-
-            return data
+            return response.data
         }
+        throw error
     }
-
-    
 }
